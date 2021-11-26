@@ -11,7 +11,7 @@
                 if(!response.ok) {
                     throw new Error('HTTP error! status: ${response.status}');
                 } else {
-                    return resopnse.blob(); 
+                    return response.blob(); 
                 }
             })
             .then(myBlob => {
@@ -20,7 +20,7 @@
                 image.src = objectURL; 
                 document.body.appendChild(image); 
             })
-            .catch(e=> {
+            .catch(e => {
                 console.log('There has been a problem with your fetch operation: ' + e.message);
             });
         </script>
