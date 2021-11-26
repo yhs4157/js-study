@@ -6,6 +6,21 @@
     </head>
     <body>
         <script>
+            function fetchAndDecode(url, type) {
+                return fetch(url).then(response => {
+                    if(type === 'blob') {
+                        return response.blob();
+                    } else if(type === 'text') {
+                        return response.text(); 
+                    }
+                })
+                .catch( e=> {
+                    console.log('There has been a problem with your fetch operation: ' + e.message); 
+                })
+                .finally(() => {
+                    console.log('fetch attemp for "${url}" finished.');
+                });
+            }
 
             let coffee = fetchAndDecode('coffee.jpg', 'blob'); 
             let tea = fetchAndDecode('tea.jpg', 'blob'); 
@@ -28,22 +43,6 @@
                 para.textContent = descText; 
                 docuement.body.appendChild(para); 
             });
-
-            function fetchAndDecode(url, type) {
-                return fetch(url).then(response => {
-                    if(type === 'blob') {
-                        return response.blob();
-                    } else if(type === 'text') {
-                        return response.text(); 
-                    }
-                })
-                .catch( e=> {
-                    console.log('There has been a problem with your fetch operation: ' + e.message); 
-                })
-                .finally(() => {
-                    console.log('fetch attemp for "${url}" finished.');
-                });
-            }
         </script>
     </body>
 </html>
