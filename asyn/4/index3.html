@@ -7,6 +7,20 @@
     <body>
         <script>
 
+            function fetchAndDecode(url, type) {
+                return fetch(url).then(response => {
+                    if(type === 'blob') {
+                        return response.blob();
+                    } else if(type === 'text') {
+                        return response.text(); 
+                    }
+                })
+                .catch( e=> {
+                    console.log('There has been a problem with your fetch operation: ' + e.message); 
+                })
+            };
+
+
             let coffee = fetchAndDecode('coffee.jpg', 'blob'); 
             let tea = fetchAndDecode('tea.jpg', 'blob'); 
             let description = fetchAndDecode('description.txt', 'text'); 
@@ -26,21 +40,8 @@
 
                 let para = document.createElement('p'); 
                 para.textContent = descText; 
-                docuement.body.appendChild(para); 
+                document.body.appendChild(para); 
             });
-
-            function fetchAndDecode(url, type) {
-                return fetch(url).then(response => {
-                    if(type === 'blob') {
-                        return response.blob();
-                    } else if(type === 'text') {
-                        return response.text(); 
-                    }
-                })
-                .catch( e=> {
-                    console.log('There has been a problem with your fetch operation: ' + e.message); 
-                })
-            }
         </script>
     </body>
 </html>
