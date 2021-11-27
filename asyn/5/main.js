@@ -7,7 +7,7 @@ async function myFetch() {
     return await response.blob(); 
 }
 
-myFetch().then((blob) => {
+myFetch().then((myBlob) => {
     let objectURL = URL.createObjectURL(myBlob); 
     let image = document.createElement('img'); 
     image.src = objectURL; 
