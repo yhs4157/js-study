@@ -1,0 +1,74 @@
+기존의 서버 방식은 무엇이 문제인가? 
+ - 필요한 부분 이외에 전체의 페이지를 전부 다시 로드해야하낟. 
+
+ Enter Ajax(Asynchrous Javascript and XML)
+ - 필요로 하는 작은 부분만 불러내는 기술
+ - XMLHttpRequest API
+ - Fetch API
+ - 1. 이용가능한 특별한 자원을 요청하는 기능
+ - 2. 필요로 되는 데이터로 형식맞추기
+
+    HTTP Request  Request data
+ server -> AJAX -> client
+
+ server <- AJAX <- client
+    HTTP Response   Provide data
+
+AJAX = 웹 API를 사용함. 
+ + user의 컴퓨터 속의 로컬 저장소 데이터를 먼저 사용하는 등 속도를 높이는 방법을 사용한다. 
+
+2) 기초적인 AJAX Request
+let request = new XMLHTTpRequest(); 
+
+request.open('GET', url); 
+open method = 네트워크로부터 자원을 요청할 때 사용
+
+request.responseType = 'text'; 
+responseType = 반환에 대한 값을 지정
+
+네트워크로 자원을 받아오는 행위는 모두 비동기적으로 이루어진다. 
+request.onload = function() {
+    poemDisplay.textContent = request.response; 
+};
+
+위의 행위로 XMLHTTpRequest 함수을 업무는 끝났다. 함수를 닫기위해 사용함. 
+request.send(); 
+
+원래 예시
+let request = new XMLHttpRequest(); 
+request.open('GET', url); 
+request.responseType = 'text'; 
+
+request.onload = function() {
+    poemDisplay.textContent = request.response; 
+};
+
+request.send(); 
+
+-> Fetch로 변환
+fetch(url).then(function(response) {
+    response.text().then(function(text) {
+        poemDisplay.textContent = text; 
+    });
+});
+
+fetch는 어떻게 생겼나?
+ - fetch() funtion = request.open() + .send()
+ - .then()은 Promise를 반환한다. 현재 비동기에서 가장 중요한 부분이다. 
+ + onload와 같은 function
+ - text() = request.responseType = text
+
+추가적인 promise 
+
+조금 더 발전시킨 code
+fetch(url).then(function(response) {
+    return response.text()
+}).then(function(text) {
+    poemDisplay.textContent = text; 
+});
+
+걔 중 무엇을 니가 사용할 수 있나?
+XHR = 조금 된 함수(여러 브라우저에 사용가능)
+fetch & promise = 새로운 함수
+
+조금 더 복잡한 예시(*진행 포인트)
