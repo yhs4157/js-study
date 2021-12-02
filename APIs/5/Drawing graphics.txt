@@ -1,0 +1,63 @@
+Scalable Vector Graphics(SVG) language in browser
+<canvas> element, CANVAS API, WebGL
+
+아직 웹은 C++ 이나 Java처럼 그래픽을 다룰 기술은 없었다. 그러다가 애플이 추가하면서 다른 
+브라우저들이 따라 추가하였다. canvas tool은 유용한 도구이다.
+
+모질라가 3d canvas를 개선하기 시작했다. 이것은 webGL이 되었다. 
+
+이번 주제는 2d canvas에 집중한다. 하지만 WebGL 라이브러리 방식을 보여줄 것이다. 그리고
+너는 WebGL에 대해서도 접근할 수 있다. 
+
+<canvas>에 천천히 시작하기. 
+ - 너는 2d나 3d 그림을 만들고 싶다면 HTML <canvas>을 시도할 필요가 있다. 이 요소는
+ 페이지에 그림 그릴 구역을 정의해줄 필요가 있다. 
+
+ ex) <canvas width="320" height="240"></canvas>
+
+canvas 태그들 사이에 canvas를 지원하지 않는 브라우저에 대한 피드백 content를 넣을 수 있다.
+
+canvas를 창조 및 크기정하기
+ 1. <canvas> element in HTML
+ 2. canvas attribute control in script
+    2.1 window.innerWidth, window.innerHeight 두가지로 윈도우 창에 맞춤으로 변환가능
+ 3. body margin: 0; overflow: hidden; in style 스크롤바를 없애기 위한 대책
+
+canvas 컨텐츠와 마지막 설정하기
+  - canvas의 내용물을 설정한다. ex) const ctx = canvas.getContext('2d'); 
+  - 색에 대한 정의 ctx.fillStyle = 'rgb(0, 0, 0);
+  - 크기에 대한 정의 ctx.fillRect(0, 0, width, height); 
+
+2d canvas 기초
+   - CanvasRenderingContext2D object
+   - 위치는 위, 왼쪽을 기준으로 잡아 x, y를 사용한다. 
+
+단순한 사각형
+ ex) ctx.fillStyle = 'rgb(255, 0, 0)'; 
+ ctx.fillRect(50, 50, 100, 150); 
+            // 위, 왼쪽, 너비, 높이
+
+아웃라인(stroke) 그리기
+ ctx.strokeStyle = 'rgb(255, 255, 255)';
+ ctx.strokeRect(25, 25, 175, 200); 
+ ctx.lineWidth = 5; 
+
+방법 그리기
+
+선 그리기 
+
+원 그리기
+
+텍스트
+
+canvas에 이미지 파일 올리기
+
+루프와 애니메이션
+ - 루프 만들기
+ - 애니메이션
+
+단순 그리기 어플
+
+WebGL
+
+큐브만들기

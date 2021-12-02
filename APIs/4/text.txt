@@ -1,0 +1,39 @@
+서드파티 API란? 
+ - 서드 파티 API는 일반적으로 페이스북, 트위터, 구글 같은 기업을 서드파티라 하며 그들이 제공하는 API를
+ 의미한다. 그들의 기능을 자바스크립트로 너가 접근하기를 허가한다. 그리고 그 기능을 너의 사이트에 사용되기를.
+ 대부분의 명백한 예시 중 하나가 너의 홈페이지에 커스텀된 지도를 출력하는 매핑 API이다.  
+
+ 단순한 매핑 API를 보자. 브라우저 API와 서드파티 API를 구별해보자. 
+
+ 그들은 서드파티용 서버를 설치해 놓았다. 
+
+ 브라우저 API는 브라우저에서 사용된다. 너는 자바스크립트로 바로 접근할 수 있다. 예를 들면
+ 웹 오디오 API는 AudioContext 오브젝트를 사용한다. 
+
+ 반면에 서드파티 API는 서드 파티 서버에 속해있다. 자바스크립트로 접근하기 위해 너는 일단
+ API 기능에 접근할 필요가 있고 그것이 너의 홈페이지에 사용가능하게 만들 필요가 있다. 
+ 그것은 전형적으로 서버에 접근하는 자바스크립트 라이브러리에 script 앨리멘트로 첫 접근을 포함한다. 
+
+// restful api와 관련된 언급이 따로 나옴. 
+
+API key를 요구한다. 
+ - 브라우저 API에 대한 보안은 프롬프트 인가로 다루어진다. 이 목적은 유저가 그들이 방문한 
+ 웹사이트가 무엇을 할지 알고 악의적인 접근을 줄일 수 있다. 
+
+ 서드파티 API는 접근 시스템은 약간 다르다. 그들은 개발자 key로 API 기능에 대한 접근을 
+ 조절한다. 
+
+ 너는 MAPquest API 예제에서 다음과 같은 라인을 보았을 것이다. 
+
+// Google MAP API 
+
+// NYTimes RESTful API 
+
+1. find the documentation 
+2. get a developer key
+3. connect the API to your app
+4. requesting data from the API
+5. displaying the data
+6. wiring up the pagination buttons
+
+// youtube API도 존재

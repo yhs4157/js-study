@@ -1,0 +1,17 @@
+HTML5 비디오와 오디오
+ - video, audio 요소들은 우리가 웹페이지 안에 비디오 오디오을 포함시키게 해준다. 
+ex) 
+<video controls>
+    <source src="rabbit320.mp4" type="video/mp4">
+    <source src="rabbit320.webm" type="video/webm">
+    <p> Your brower doesn't support HTML video.</p>
+</video>
+
+비디오 컨트롤러는 브라우저들마다 다르게 제공된다. 기본 컨트롤러들은 키보드 접근성을
+신경쓰지 않는다. 
+
+HTMLMediaElement API
+ - HTML5 스펙 중 한 부분으로 HTMLMediaElement API는 니가 비디오와 오디오 플레이어
+ 를 전문적으로 조절하는 것을 허가해준다. 예를 들면 같인 인터페이스 제공이라던가 
+
+ 
