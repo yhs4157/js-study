@@ -99,4 +99,19 @@ Separate storage for each domain
  너는 에제 HTML persional-greeting.html을 찾아라. 이 예제는 단순한 웹사이트 해어, 
  컨텐츠, 푸터를 지니고 있다. 그리고 너의 이름을 넣을 양식도
 
+Storing complex data - IndexedDB
+
+ - indexedDB는 복잡한 데이터베이스 시스템을 브라우저 상에서 사용가능하게 한다. 그것은
+ 너가 복잡하게 연관된 데이터를 저장할 수 있다. 그것의 타입은 제한이 없다. 너는 비디오, 이미지,
+ 등등 indexedDB 인스턴스에 저장할 수 있다. 
+
+ - 하지만 이것은 비용이 든다. indexedDB는 Web Storage APi보다 복잡하다. 이번 세션에서
+ 우리는 오직 표면만 만져볼 것이다. 하지만 우리는 니가 시작할 수 있을 만큼 충분히 줄 것이다. 
+
+ Working through a note storage example
+
+ - 여기 우리가 작동시킬 예제가 있다. 너의 브라우저와 뷰를 저장하고 너가 원할 때 언제든지
+ 삭자할 수 있도록 허가된. 너가 직접 쌓아올리고 우리가 진행함으로써 IDB의 근본적인 대부분을
+ 설명할 수 있다 .
+
  
