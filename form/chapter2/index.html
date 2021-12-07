@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>checklist</title>
+    </head>
+    <body>
+        <filedset>
+            <legend>Choose all the vegetables you like to eat</legend>
+            <ul>
+                <li>
+                    <label for="carrots">Carrots</label>
+                    <input type="checkbox" id="carrots" name="vegetable" value="carrots" checked>
+                </li>
+                <li>
+                    <label for="peas">Peas</label>
+                    <input type="checkbox" id="peas" name="vegetable" value="peas">
+                </li>
+                <li>
+                    <label for="cabbage">Cabbage</label>
+                    <input type="checkbox" id="cabbage" name="vegetable" value="cabbage">
+                </li>
+            </ul>
+        </filedset>
+
+        <ul>
+            <li>
+                <input type="checkbox" name="power" id="power">
+                <label for="power"><span class="on">On</span><span class="off">Off</span></label>
+            </li>
+        </ul>
+        <!-- 위의 예제는 속칭 Toggle switch example이다. github에 style.css관련된 부분을 모두 작성하면
+        우리가 아는 형태로 나온다. -->
+
+        <fieldset>
+            <legend>What is your favorite meal?</legend>
+            <ul>
+                <li>
+                    <label for="soup">Soup</label>
+                    <input type="radio" id="soup" name="meal" value="soup" checked>
+                </li>
+                <li>
+                    <label for="curry">Curry</label>
+                    <input type="radio" id="curry" name="meal" value="curry">
+                </li>
+                <li>
+                    <label for="pizza">Pizza</label>
+                    <input type="radio" id="pizza" name="meal" value="pizza">
+                </li>
+            </ul>
+        </fieldset>
+        
+    </body>
+</html>

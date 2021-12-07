@@ -1,0 +1,74 @@
+개요. 
+ - 다른 데이터 형태를 모으기 위한 사용가능한 옵션을 사용해보자 
+ - form 컨트롤의 오리지널 집합을 보자
+
+사용된 form 
+ <form>
+ <fieldset>
+ <legend>
+ <textarea>
+ <label>
+ <button>
+ <input>
+
+input type들
+ button
+ checkbox
+ file
+ hidden
+ image
+ password
+ radio
+ reset
+ submit
+ text
+
+Text input fields
+ - readonly(수정만 불가), disabled(보내기 자체가 불가능)
+ - placaholder(input에 목적을 기술할 수 있음.)
+ - size(단순 박스의 크기), maxlength(maxium number of char)
+ - spellcheck
+
+Single line text fields
+ - 평범하게 사용되는 input 형태
+
+Password field
+ - <input type="password" id="pwd" name="pwd>
+ - password 값은 특별한 제약이 없고 별이나 점으로 작성되어 읽기 쉽지 않다. 
+ - 보안적으로 form제출이 가능하다. https로 호스트페이지를 보안 거는것이 가장 좋음. 
+ 
+Hidden content
+ - 유저에게 보이지 않는 form control을 생성하여 사용하는 것. 
+ - ex) timestamp
+
+Checkable items: checkboxed and radio buttons
+ - 보낼 것이냐 아니면 아무것도 안 보낼 것이냐 선택이 가능. 
+
+* form과 fieldset 차이 
+ - form은 동적인 웹을 위해서 사용. 
+ - fieldset은 정보구별을 위해 사용. 
+
+checkbox - 여러가지를 선택가능
+radio button - 단 한가지를 선택가능
+
+image button 
+ - 사실 이미지 버튼은 그저 img input에 불가하다. 그 대신 x, y 좌표를 보냄으로
+ 그에 대한 작동을 일으킨다. 
+ ex) <input type="image" src=path>
+ - 다만 인터넷에서는 button 사이에 img파일을 삽입한다. 
+ ex) <button type="button"> <img src=path height="80" width="100" /></button>
+
+File picker
+ - 파일을 받아오는 input
+ ex) <input type="file" name="file" id="file" accept="image/*" multiple>
+    accept는 image, video, audio 
+    multiple은 여러 파일을 받아올 수 있는 기능이다. 
+
+이외에도 흔한 속성들
+ autofocus : true/false, default: false, 파일을 로드할 떄 자동적으로 focus함. 
+ disabled : true/false, default: false, 사용할 수 없게함. 
+ form : form요소 안에서 다른 form에 속할 때 사용가능. 
+ name : 해당 요소의 이름은 지정 
+ value : 해당 요소의 초기값
+
+

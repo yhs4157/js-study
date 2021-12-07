@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <title>Form</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <form action="/my-handling-form-page" method="post">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="user_name"/>
+            </div>        
+            <div>
+                <label for="mail">E-mail</label>
+                <input type="email" id="mail" name="user_mail"/>
+            </div>
+            <div>
+                <label for="msg">Message:</label>
+                <textarea id="msg" name="user_message"></textarea>
+            </div>
+            <div class="button">
+                <button type="submit">Send your message</button>
+            </div>
+        </form>
+    </body>
+</html>
+
+<!--
+    1. form은 웹서버로 데이터를 보냄에 목적이 있다.
+        action = 웹서버 URL을 지정
+        method = 어떤 HTTP 방식을 사용할 것인가? GET or POST
+    
+    2. <div>는 구성과 스타일링을 돕는다. 
+    3. <label>에서 for은 form과 label을 엮는다. label for - form id
+    4. <input>에서는 type이 중요한 속성이다. 입력받을 것을 정의함으로 검사를 수행하기도 한다. 
+    5. <input> vs <textarea>의 차이는 default를 삽입시 input은 value 속성에
+        textarea는 textcontent에 넣는다. 
+    
+    6. <button>은 종류는 3가지
+        <submit> = action에 form 데이터를 전송한다. 
+        <reset> = form 위젯을 초기화한다. 좋은 방법은 아님. 
+        <button> = javascript에 정의된대로 작동한다. 
+    
+    7. name 속성을 통해서 데이터의 이름을 정의한다. 
+-->
