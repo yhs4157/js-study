@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML5 form</title>
+        <style>
+            input {
+                margin-bottom: 1rem; 
+            }
+        </style>
+        <script src="main.js" defer></script>
+    </head>
+    <body>
+        <label for="email">email form : </label>
+        <input type="email" name="email" id="email" multiple>
+        <br>
+
+        <label for="search">search form : </label>
+        <input type="search" name="search" id="search">
+        <br>
+
+        <label for="tel">tel form : </label>
+        <input type="tel" name="tel" id="tel">
+        <br>
+
+        <label for="url">url form : </label>
+        <input type="url" name="url" id="url">
+        <br>
+
+        <label for="number">number form : </label>
+        <input type="number" name="number" id="number">
+        <br>
+
+        <label for="price">Choose a maximum house price: </label>
+        <input type="range" name="price" id="price" min="50000" max="500000" step="100" value="250000">
+        <output class="price-output" for="price"></output>
+        <br>
+
+        <input type="datetime-local" name="datetime" id="datetime">
+        <br>
+
+        <input type="month" name="month" id="month">
+        <br>
+
+        <input type="time" name="time" id="time">
+        <br>
+
+        <input type="week" name="week" id="week">
+        <br>
+
+        <label for="myDate">When are you available this summer?</label>
+        <input type="date" name="myDate" min="2013-06-01" max="2013-08-31" step="7" id="myDate">
+        <br>
+
+        <input type="color" name="color" id="color">
+    </body>
+</html>
