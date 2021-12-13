@@ -1,0 +1,131 @@
+바운스하는 공 만들어보기
+ 
+ - 이번에는 우리가 전통적인 "bounding balls" 데모이다. 너에게 오브젝트가 JS에서
+얼마나 유용한지를 보여주기 위해서. 우리의 작은 공들은 스크린에서 바운스할 것이다. 그리고 색이
+변할 것이다. 그들이 각자와 부딫힐 때마다. 그 예제의 마지막은 이렇게 보여질 것이다. 
+
+ - 이 예제는 Canvas API를 사용할 것이다. 스크린에 공을 그리기 위해서, 그리고 request
+ AnimationFrame API를 전체 디스플레이 애니메이션을 위해 사용할 것이다. 너는 어떤 이전의 
+ 지식도 필요로 하지 않는다. 이 API에 대해. 그리고 우리는 너가 이 순간을 조금 더 흥미롭게 
+ 탐색하기를 원한다. 이 방법 중에서 우리는 몇몇 멋진 오브젝트를 사용할 것이다. 그리고 너에게
+ 바운스 공과 같은 멋진 기술의 한 쌍을 보여줄 것이다. 그들은 각각 부딫혔는지 확인할 것이다. 
+
+시작하기
+
+const canvas = document.querySelector('canvas'); 
+// canvas를 참조한다. 
+const ctx = document.getContext('2d'); 
+// 2d 그림을 그릴 것이다. 
+
+const width = canvas.width = window.innerWidth; 
+const height = canvas.width = window.innerHeight; 
+// canvas의 너비와 높이를 맞추기 위한 것. 
+// 기기의 viewport와 같게 선언. 
+
+우리가 여러 할당을 엮고 있다. 변수를 더 빨리 세팅하기 위하여. 
+
+function random(min, max) {
+    const num = Math.floor(Math.random() *  (max - min + 1)) + min; 
+    return num; 
+}
+
+ - 이 함수는 두 수를 인수를 받는다. 그리고 랜덤한 수를 반환한다. 두 사이에 있는
+ Math.random()은 0이상 1미만의 값을 지닌다. 부동소숫점을 지닌다. 그리허기에 위와같은 
+ 조정이 이루어진다. 
+ Math.floor()을 통해 내림처리를 한다. 소수 절삭이 이루어지기에 +1을 경우 최댓값을 포함
+ 하게 된다. 
+
+프로그램에 공 모델링하기
+
+ - 우리 프로그램은 스크린 주위로 많은 바운스하는 공을 만들 것이다. 그 공은 모두 같은 방법
+ 으로 움직이기 위해서, 그들을 오브젝트로 나타내는 것이 합리적이다. 
+
+function Ball(x, y, valX, valY, color, size) {
+    this.x = x; 
+    this.y = y; 
+    this.valX = valX; 
+    this.valY = valY; 
+    this.color = color; 
+    this.size = size; 
+}
+ - x, y : 수직적인 혹은 수평적인 좌표 공이 스크린에서 시작하는. 이것은 0에서 viewport 
+ 전체이다. 
+ - velX, velY : 각 공에게 주어지는 수직적, 수평적인 공의 속도이다. 실제로 그 값은 
+ x/y 좌표값을 더한 것이다. 우리 공을 움직일 때. 그들을 각 프레임으로부터 움직이기 위해서
+
+공 그리기
+
+Ball.prototype.draw = function() {
+    ctx.beginPath(); 
+    ctx.fillStyle = this.color; 
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI); 
+    ctx.fill(); 
+}
+ - beginPath()는 우리가 종이 위에 모양을 그리기 원하는 상태이다. 
+ - fillStyle은 우리가 모양에 넣을 색을 정의한다. 
+ - arc()는 종이 위 아크 모양을 추적하는 메소드다. 그것의 파라미터는 
+  - x, y 아크 중심의 위치- 우리는 공의 x, y 값을 특수화 한다. 
+  - 아크의 반지름
+  - 마지막 두 파라미터는 시작과 끝을 명시한다. 0과 2*PI로 명시했는데, 이것은 라디안 360도
+  와 동일한 값이다.
+  - 마지막 fill() 메소드를 사용한다. 그것은 기본적으로 beginPath()로 시작된 경로을 그리
+  기를 끝내는 상태이다. 그리고 앞에 fillStyle로 명시한 색으로 채우는 것을 의미한다. 
+
+  let testBall = new Ball(50, 100, 4, 4, 'blue', 10); 
+
+Ball.prototype.update = function() {
+    if((this.x + this.size) >= width) {
+        this.velX = -(this.velX); 
+    }
+
+    if((this.x - this.size) <= 0) {
+        this.velX = -(this.velX); 
+    }
+
+    if((this.y + this.size) >= height) {
+        this.velY = -(this.velY); 
+    }
+
+    if((this.y - this.size) <= 0) {
+        this.velY = -(this.velY); 
+    }
+
+    this.x += this.velX; 
+    this.y += this.velY; 
+}
+
+ - 그 첫 함수의 4부분은 공이 cavas안에 있는지 아닌지를 검사한다. 그렇다면, 너는 
+ x 좌표가 canvas 너비보다 크면 해당 속도의 방향을 뒤집는다. 공을 반대 방향으로 보내기
+ 위해.
+
+ - 4가지 경우에서 우리는 확인할 수가 있다. 
+  : x 좌표가 canvas의 너비보다 클 경우
+  : x 좌표가 0보다 작을 경우
+  : y 좌표가 canvas의 높이보다 클 경우
+  : y 좌표가 0보다 작을 경우
+
+ - 각 졍우 우리는 공의 size를 계산에 포함한다. 왜냐하면 x/y 좌표가 공의 중심이기 떄문이다. 
+ 하지만 우리는 공의 끝부분이 그 둘레가 튕긴다. - 우리는 공이 스크린 밖으로 나가기를 원치 않는다. 
+
+공 움지이기
+
+while(balls.length <25) {
+    let size = random(10, 20); 
+    let ball = new ball(
+        random(0 + size, width - size), 
+        random(0 + size, height - size),
+        random(-7, 7), 
+        random(-7, 7), 
+        'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) + ')',
+        size 
+    );
+    balls.push(ball); 
+}
+
+ - while 루프는 새로운 우리 공 인스턴스를 생성한다. random() 함수가 생성하는 random 값
+ 을 사용하면서, 그 떄 push()는 balls 배열에 끝에 그것을 추가한다. 하지만 오직 공 배열은
+ 25개보다 적다. 그래서 너는 25 공 배열을 가지고, 적을 시 추가한다. 너는 공에 다양한 수를 
+ 다룰 수 있다. balls.length <25 을 조절하여. 얼마나 너의 컴퓨터/브라우저가 힘을 지녔냐에 따라
+ 수천의 공을 명시할 수도 있다. 
+
+ 
