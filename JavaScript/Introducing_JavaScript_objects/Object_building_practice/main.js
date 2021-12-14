@@ -1,21 +1,21 @@
 const canvas = document.querySelector('canvas'); 
 
-const ctx = document.getContext('2d'); 
+const ctx = canvas.getContext('2d'); 
 // 2d 그림을 그릴 것이다. 
 
 const width = canvas.width = window.innerWidth; 
-const height = canvas.width = window.innerHeight; 
+const height = canvas.height = window.innerHeight; 
 
 function random(min, max) {
-    const num = Math.floor(Math.random() *  ( max - min + 1)) + min; 
+    const num = Math.floor(Math.random() * (max - min + 1)) + min; 
     return num; 
 }
 
-function Ball(x, y, valX, valY, color, size) {
+function Ball(x, y, velX, velY, color, size) {
     this.x = x; 
     this.y = y; 
-    this.valX = valX; 
-    this.valY = valY; 
+    this.velX = velX; 
+    this.velY = velY; 
     this.color = color; 
     this.size = size; 
 }
@@ -25,7 +25,7 @@ Ball.prototype.draw = function() {
     ctx.fillStyle = this.color; 
     ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI); 
     ctx.fill(); 
-}
+};
 
 Ball.prototype.update = function() {
     if((this.x + this.size) >= width) {
@@ -46,13 +46,27 @@ Ball.prototype.update = function() {
 
     this.x += this.velX; 
     this.y += this.velY; 
-}
+};
+
+Ball.prototype.collisionDetect = function() {
+    for(let j=0; j < balls.length; j++) {
+        if(!(this === balls[j])) {
+            const dx = this.x - balls[j].x; 
+            const dy = this.y - balls[j].y; 
+            const distance = Math.sqrt(dx*dx + dy*dy); 
+
+            if(distance <this.size + balls[j].size) {
+                balls[j].color = this.color = 'rgb(' + random(0, 255) + ',' + random(0,255) + ',' + random(0,255) + ')'; 
+            }
+        } 
+    }
+};
 
 let balls = []; 
 
 while(balls.length <25) {
     let size = random(10, 20); 
-    let ball = new ball(
+    let ball = new Ball(
         random(0 + size, width - size), 
         random(0 + size, height - size),
         random(-7, 7), 
@@ -70,6 +84,7 @@ function loop() {
     for(let i = 0; i < balls.length; i++) {
         balls[i].draw(); 
         balls[i].update(); 
+        balls[i].collisionDetect(); 
     }
     requestAnimationFrame(loop); 
 }

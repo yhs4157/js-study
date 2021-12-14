@@ -128,4 +128,35 @@ while(balls.length <25) {
  다룰 수 있다. balls.length <25 을 조절하여. 얼마나 너의 컴퓨터/브라우저가 힘을 지녔냐에 따라
  수천의 공을 명시할 수도 있다. 
 
- 
+ Ball.prototype.collisionDetect = function() {
+    for(let j=0; j < balls.length; j++) {
+        if(!(this === balls[j])) {
+            const dx = this.x -balls[j].x; 
+            const dy = this.y - balls[j].y; 
+            const distance = Math.sqrt(dx*dx + dy*dy); 
+
+            if(distance <this.size + balls[j].size) {
+                balls[j].color = this.color = 'rgb(' + random(0, 255) + ',' + random(0,255) + ',' + random(0,255) + ')'; 
+            }
+        } 
+    }
+}
+
+ - 각 공에 대해, 너는 모든 다른 공을 확인할 필요가 있다. 다른 공이 현재 공과 충돌하는지. 이것을 하기 위해서
+ 우리는 다른 for 문을 balls 배열에 다른 공을 통해 루프해야한다. 
+ - 즉각적으로 그 for 루프안에, 우리는 if 상태를 집어 넣는다. 현재 공이 우리가 확인하는 공과 같은 공인지 아닌지
+ 우리는 공 자기자신과 충돌하는 것을 원지 않는다. 이것을 하기 위해서는, 우리는 현재 공인지 확인해야한다. 우리는 !를 
+ 사용한다. 확인을 부정하기 위해. 그래서 그 코드 if 문 안에는 오직 같지 않을 때만 작동한다. 
+ - 우리는 흔한 알고리즘을 쓴다. 두 원이 충돌하는지 확인하는데에. 우리는 기본적으로 다른 원 두개가 오버랩되는지 여부를 
+ 확인한다. 이것은 2d 충돌감지에 설명되어 있다. 
+ - 충돌이 감지된다면, if문 안에 우리의 코드는 작동한다. 우리는 오직 두 공의 color 속성만 랜덤 값으로 바꾼다. 
+ 우리는 조금 더 복잡한 것을 할 수 있다. 공이 서로를 튕겨내는 것처럼. 하지만 그것은 너무 복잡하다. 물리적 시뮬레인션처럼
+ 개발자는 게임이나 물리 라이브러리를 사용할 수도 있다. 
+
+error : 애니메이션이 작동을 안함. 
+Ball 생성자에서 velX, velY를 valX, valY로 명시함. 
+
+이외에 차이점
+index.html에서 head에 script를 명시
+
+추가하고 싶은 것 -> 공의 갯수를 직접 추가하는 form을 추가하고 싶음. 
