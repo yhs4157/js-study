@@ -1,0 +1,176 @@
+function handleStart(evt) {
+    evt.preventDefault(); 
+    log("touchstart."); 
+    let el = document.getElementsByTagName("canvas")[0]; 
+    let ctx = el.getContext("2d"); 
+    let touches = evt.changedTouches; 
+
+    for(let i =0; i<touches.length; i++) {
+        log("touchstart: " + i + "..."); 
+        ongoingTouches.push(copyTouch(touches[i])); 
+        let color = colorForTouch(touches[i]); 
+        ctx.beginPath(); 
+        ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2*Math.PI, false); 
+        ctx.fillStyle = color; 
+        ctx.fill(); 
+        log("touchstart: " + i + '.'); 
+    }
+}
+
+ - event.preventDefault()는 브라우저가 터치 이벤트 작동을 지속적으로 못하도록한다. 
+ 그 때 우리는 컨텐츠와 list를 채운다. 이벤트의 TouchEven.changedTouches 속성의 밖
+ 터치에 대한 
+
+ - 그 후에 우리는 모든 Touch 오브젝트를 반복한다. 그들을 활동하는 터치 부분의 배열을 넣고
+ 그 시작 부분을 그린다. 작은 원으로. 우리는 4픽셀 크기를 활용한다. 그래서 4픽셀 반지름의 원은 나타난다. 
+
+터치 움직에 따라 그림그리기
+ - 모든 손가작의 움직임에 따라, touchmove 이벤트는 이벤트가 발생한다. 우리의 handleMove 함수에 결과로
+ 이 예제에서 그것의 반응은 잡힌 터치 정보를 업데이트한다. 그리고 각각 터치의 현재 위체에서 이전의 위치로부터 선을 그린다. 
+
+ function handleMove(evt) {
+    evt.preventDefault(); 
+    var el = document.getElementsByTagName("canvas")[0]; 
+    var ctx = el.getContext("2d"); 
+    var touches = evt.changedTouches; 
+
+    for(var i = 0; i < touches.length; i++) {
+        var color = colorForTouch(touches[i]); 
+        var idx = ongoingTouchIndexById(touches[i].identifier); 
+
+        if(idx >= 0) {
+            log("continuing touch" + idx); 
+            ctx.beginPath(); 
+            log("ctx.moveTo(" + ongoingTouches[idx].pageX + "," + ongoingTouches[idx].pageY + ");");
+            ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY); 
+            ctx.lineTo(touches[i].pageX, touches[i].pageY); 
+            ctx.lineWidth = 4; 
+            ctx.strokeStyle = color; 
+            ctx.stroke(); 
+
+            ongoingTouches.splice(idx, 1, copyTouch(touches[i])); 
+            log("."); 
+        } else {
+            log("can't figure out which touch to continue"); 
+        }
+    }
+}
+
+ - 위의 반복문은 변화하는 터치에 반응한다. 하지만 그것은 터치 정보 배열ㅇ를 접근하는 거승로 
+ 보인다. 각 터치의 새로운 선에 대한 시작 지점을 설명하기 위해서. 그것은 각 터치 Touch.identifier 속성에
+ 보이는 것처럼. 그 속성은 각각이 유니크한 정수이다. 그래서 각 이벤트는 화면에 손가락을 가져다된 동안 각 이벤트에 
+ 대한 일관됨을 남긴다. 
+
+ - 우리가 이전 터치한 지점에 모음을 얻는다. 두 지점을 이어 선을 그리기 위한 적절한 문맥 메소드를 얻는다. 
+
+ - 선을 그리고 난후, 우리는 Array.splice()를 호출한다. 그 함수는 ongoingTouches 배열에 현재 정보를
+ 터치 지점에 대한 이전 정보로 대체한다. 
+
+터치 종료를 다루기 
+ - 유저가 표면에서 손가락을 떨어뜨릴 때, touchend 이벤트는 전달된다. 우리는 같은 방식으로 다루어야한다. 
+ handleEnd() 함수로부터. 그것의 작업은 마지막 선을 그리는 것이다. 지속해오던 터치 리스트로부터 터치 지점이 
+ 제거한다. 
+
+function handleEnd(evt) {
+    evt.preventDefault(); 
+    log('touchend'); 
+    var el = document.getElementsByTagName("canvas")[0]; 
+    var ctx = el.getContext("2d"); 
+    var touches = evt.changedTouches; 
+
+    for(var i = 0; i < touches.length; i++) {
+        var color = colorForTouch(touches[i]); 
+        var idx = ongoingTouchIndexById(touches[i].identifier); 
+
+        if(idx >= 0) {
+            ctx.lineWidth = 4; 
+            ctx.fillStyle = color; 
+            ctx.beginPath(); 
+            ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY); 
+            ctx.lineTo(touches[i].pageX - 4, touches[i].pageY - 4, 8, 8); 
+            ongoingTouches.splice(idx, 1); 
+        } else {
+            log("can't figure out which touch to end"); 
+        }
+    }
+}
+
+ - 이전에 함수와 유사하다. 오직 약간의 차이가 작은 네모를 끝에 세기는 것이고 우리가 Array.splice()를 
+ 부를 때, 우리는 터치 리스트로부터 오래된 엔트리를 제거한다. 업데이트되는 정보가 없다면. 그 결과
+ 우리는 터치 지면을 추격하는 것을 멈춘다. 
+
+터치 제거 다루기 
+ - 유저가 브라우저 UI에 방황한다면, 혹은 다른 필요로 인해 터치가 제거된다면, 그 touchcancle 이벤트가
+ 전송된다. 그리고 우리는 handleCancel() 함수를 부른다. 
+
+function handleCancel(evt) {
+    evt.preventDefault(); 
+    log("touchcancel."); 
+    var touches = evt.changedTouches; 
+
+    for(var i = 0; i < touches.length; i++) {
+        var idx = ongoingTouchIndexById(touches[i].identifier); 
+        ongoingTouches.splice(idx, 1); 
+    }
+}
+
+ - 그 아이디어는 터치가 즉각적으로 중단되기 때문에, 우리는 지속 터치 리스트로부터 그것을 제거한다. 
+ 마지막 선분을 그리지 않고
+
+편의성 기능
+ - 예제는 두 편리한 함수를 사용한다. 조금 더 코드가 깔끔해 보이도록
+
+1. 각 터치에 대한 색 선택하기
+ : 터치 그림을 다르게 보이기 위하여, 그 colorForTouch() 함수는 터치의 독특한 개성에 
+ 색을 입혀 사용한다. 이 구별은 불투명한 수이지만 우리는 적어도 현재-활동하는 터치간 차이를 
+ 둔다. 
+
+ function colorForTouch(touch) {
+    var r = ouch.identifier % 16; 
+    var g = Math.floor(touch.identifier / 3) % 16; 
+    var b = Math.floor(touch.identifier / 7) % 16; 
+    r = r.toString(16); 
+    g = g.toString(16); 
+    b = b.toString(16); 
+    var color = "#" + r + g + b; 
+    log("color for touch with identifier " + touch.identifier + " = "  + color); 
+    return color; 
+}
+ - 함수로부터 결과는 <canvas> 함수에서 색을 입힐 떄 쓰이는 문자열이다. 예제는 Touch.identifier 값에 대해, 
+ 결과인 문자열은 #aaa이다. 
+
+ 2. 터치 오브젝트 복사하기 
+  : 몇몇 브라우저들은 터치 오브젝트를 재 사용한다. 그래서 전체 오브젝트를 대체하는 대신에 너가 필요한 비트를
+  복사하는 것이 좋다. 
+
+function copyTouch(touch) {
+    return {identifier: touch.identifier, pageX: touch.pageX, pageY: touch.pageY};
+}
+
+3. 지속되는 터치를 찾기
+ : ongoingTouchIndexById() 함수는 ongoingtouches 배열을 스캔한다. 주어진 식별자를 
+ 일치시키기 위해서, 그때 터치의 인덱스는 반환된다. 
+
+function ongoingTouchIndexById(idToFind) {
+    for(var i =0; i<ongoingTouches.length; i++) {
+        var id = ongoingTouches[i].identifier; 
+
+        if(id === idToFind) {
+            return i; 
+        }
+    }
+    return -1; 
+}
+
+4. 무엇이 일어나는지 보여주기. 
+function log(msg) {
+    var p = document.getElementById('log'); 
+    p.innerHTML = msg + "\n" + p.innerHTML; 
+}
+/*
+querySelector       vs  getElementById 
+(querySelectorAll)      (getElementByClassName)
+그룹을 통한 엘리멘트반환 vs ID를 통한 엘리멘트 반환
+(id, class, element etc) vs DOM id
+css selector와 동일함. 
+*/
