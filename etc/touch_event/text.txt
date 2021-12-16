@@ -174,3 +174,8 @@ querySelector       vs  getElementById
 (id, class, element etc) vs DOM id
 css selector와 동일함. 
 */
+
+// 문제점. 
+1. 기기에서 사용할 떄 화면 크기가 맞지 않음. 
+2. 초기화 없음. 
+3. 컬러는 어디 사용되는지 확인이 되지않음. 
