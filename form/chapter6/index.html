@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Advanced form styling</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="example1">
+            <form>
+                <p>
+                    <label for="search">search: </label>
+                    <input id="search" name="search" type="search">
+                </p>
+                <p>
+                    <label for="text">text: </label>
+                    <input id="text" name="text" type="text">
+                </p>
+                <p>
+                    <label for="date">date: </label>
+                    <input id="date" name="date" type="datetime-local">
+                </p>
+                <p>
+                    <label for="radio">radio: </label>
+                    <input id="radio" name="radio" type="radio">
+                </p>
+                <p>
+                    <label for="checkbox">checkbox: </label>
+                    <input id="checkbox" name="checkbox" type="checkbox">
+                </p>
+                <p>
+                    <input type="submit" value="submit">
+                </p>
+                <p>
+                    <input type="button" value="button">
+                </p>
+            </form>
+        </div>
+        <span id="example2">
+            <input type="checkbox">
+        </span>
+        <div id="example3">
+            <div>
+                <form>
+                    <fieldset>
+                        <legend>Fruit preference</legend>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="fruit-1" value="cherry">
+                                I like cherry
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="fruit-2" value="banana" disabled>
+                                I can't like banana
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="fruit-3" value="strawberry">
+                                I like strawberry
+                            </label>
+                        </p>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div id="example4">
+            <p>
+                <label for="select">Select box: </label>
+                <div id="select_wrapper">
+                    <select id="select">
+                        <option>banana</option>
+                        <option>cherry</option>
+                        <option>strawberry</option>
+                    </select>
+                </div>
+            </p>
+            <p>
+                <label for="fruitlist">"Favorite fruit?" datalist:</label>
+                <div id="datalist_wrapper">
+                    <input list="datalist" id="fruitlist">
+                    <datalist id="datalist">
+                        <option value="Apple"></option>
+                        <option value="Banana"></option>
+                        <option value="Blueberry"></option>
+                        <option value="Blackberry"></option>
+                        <option value="Lemon"></option>
+                        <option value="Lychee"></option>
+                        <option value="Peach"></option>
+                        <option value="Pear"></option>
+                    </datalist>
+                </div>
+            </p>
+            <p>
+                <label for="datetime">Datetime local: </label>
+                <div>
+                    <input type="date" id="datetime">
+                </div>
+            </p>
+            <p>
+                <label for="range">
+                    <progress ></progress>
+                </label>
+            </p>
+        </div>
+    </body>
+</html>

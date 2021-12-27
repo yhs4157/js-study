@@ -1,0 +1,47 @@
+div#example1 input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+span#example2 {
+  display: inline-block;
+  background: red;
+}
+
+span#example2 input[type="checkbox"] {
+  width: 100px;
+  height: 100px;
+}
+
+div#example3 div:nth-child(1) input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+div#example3 div:nth-child(1) input[type="checkbox"] {
+  position: relative;
+  width: 1em;
+  height: 1em;
+  border: 1px solid gray;
+  vertical-align: -2px;
+  color: green;
+}
+
+div#example3 div:nth-child(1) input[type="checkbox"]::before {
+  content: "✔";
+  position: absolute;
+  font-size: 1.2em;
+  right: -1px;
+  top: -0.3em;
+  visibility: hidden;
+}
+
+div#example3 div:nth-child(1) input[type="checkbox"]:checked::before {
+  visibility: visible;
+}
+
+div#example3 div:nth-child(1) input[type="checkbox"]:disabled {
+  border-color: black;
+  background: #ddd;
+  color: gray;
+}
