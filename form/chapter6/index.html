@@ -67,43 +67,64 @@
             </div>
         </div>
         <div id="example4">
-            <p>
-                <label for="select">Select box: </label>
-                <div id="select_wrapper">
-                    <select id="select">
-                        <option>banana</option>
-                        <option>cherry</option>
-                        <option>strawberry</option>
-                    </select>
-                </div>
-            </p>
-            <p>
-                <label for="fruitlist">"Favorite fruit?" datalist:</label>
-                <div id="datalist_wrapper">
-                    <input list="datalist" id="fruitlist">
-                    <datalist id="datalist">
-                        <option value="Apple"></option>
-                        <option value="Banana"></option>
-                        <option value="Blueberry"></option>
-                        <option value="Blackberry"></option>
-                        <option value="Lemon"></option>
-                        <option value="Lychee"></option>
-                        <option value="Peach"></option>
-                        <option value="Pear"></option>
-                    </datalist>
-                </div>
-            </p>
-            <p>
-                <label for="datetime">Datetime local: </label>
-                <div>
-                    <input type="date" id="datetime">
-                </div>
-            </p>
-            <p>
-                <label for="range">
-                    <progress ></progress>
-                </label>
-            </p>
+            <form>
+                <p id="select">
+                    <label for="select">Select box: </label>
+                    <div id="select_wrapper">
+                        <select id="select">
+                            <option>banana</option>
+                            <option>cherry</option>
+                            <option>strawberry</option>
+                        </select>
+                    </div>
+                </p>
+                <p id="datalist">
+                    <label for="fruitlist">"Favorite fruit?" datalist:</label>
+                    <div id="datalist_wrapper">
+                        <input list="mySuggestion" id="fruitlist">
+                        <datalist id="mySuggestion">
+                            <option value="Apple"></option>
+                            <option value="Banana"></option>
+                            <option value="Blueberry"></option>
+                            <option value="Blackberry"></option>
+                            <option value="Lemon"></option>
+                            <option value="Lychee"></option>
+                            <option value="Peach"></option>
+                            <option value="Pear"></option>
+                        </datalist>
+                    </div>
+                </p>
+                <p id="datetime">
+                    <label for="datetime">Datetime local: </label>
+                    <div>
+                        <input type="date" id="datetime">
+                    </div>
+                </p>
+                <p id="range">
+                    <label for="range">Range: </label>
+                    <input id="range" name="range" type="range">
+                </p>
+                <p id="color">
+                    <label for="color">Color: </label>
+                    <input id="color" name="color" type="color">
+                </p>
+                <p id="file">
+                    <label for="file picker">File picker: </label>
+                    <input id="file" name="file" type="file" mulitple>
+                    <ul id="file-list"></ul>
+                </p>
+                <p id="progress">
+                    <label for="progress">Progress: </label>
+                    <progress max="100" value="75" id="progress">
+                        75/100
+                    </progress>
+                </p>
+                <p id="meter">
+                    <label for="meter">Meter: </label>
+                    <meter id="meter" min="0" max="100" value="75" low="33" high="66" optimum="50">75</meter>
+                </p>
+                <button>Submit?</button>
+            </form>
         </div>
     </body>
 </html>

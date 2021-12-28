@@ -45,3 +45,63 @@ div#example3 div:nth-child(1) input[type="checkbox"]:disabled {
   background: #ddd;
   color: gray;
 }
+
+div#example4 {
+  font-family: "Josefin Sans", sans-serif;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+div#example4 form > div {
+  margin-bottom: 20px;
+}
+
+div#example4 form > div select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+div#example4#select-wrapper {
+  position: relative;
+}
+
+div#example4#select-wrapper::after {
+  content: "▼";
+  font-size: 1rem;
+  top: 6px;
+  right: 10px;
+  position: absolute;
+}
+
+div#example4 button,
+div#example4 label,
+div#example4 input,
+div#example4 select,
+div#example4 progress,
+div#example4 meter {
+  display: block;
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px;
+  height: 30px;
+}
+
+div#example4 form p input[type="text"],
+div#example4 form p input[type="datetime-local"],
+div#example4 form p input[type="color"],
+div#example4 form p select {
+  box-shadow: inset 1px 1px 3px #ccc;
+  border-radius: 5px;
+}
+
+div#example4 label {
+  margin-bottom: 5px;
+}
+
+div#example4 button {
+  width: 60%;
+  margin: 0 auto;
+}

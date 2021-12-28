@@ -38,4 +38,6 @@ Taming search boxes
 
  - 이것은 appearance: none; 사용할 수 있다. 그리고 그것은 기본 아쿠아 appearance이다. 
 
- 
+중간 과정부터 이해가 모자라 넘김. 
+ - 핵심 : 이번 챕터에서는 css로 처리하기 힘든 HTML form들에 관한 styling을 다루었다. 
+ 불가능한 것은 아니고 조금 지저분한 방식으로 변형을 가할 수 있다. 
